@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProfileComponent } from './profile.component';
+import { ProfileComponent } from '@app/profile/containers/profile/profile.component';
 import { SharedModule, PhoneFormatPipe, AppStateService } from '@app/shared';
 import { AddressListComponent } from '@app/profile/containers/address-list/address-list.component';
 import { ProfileModule } from '@app/profile/profile.module';
@@ -33,7 +33,6 @@ describe('ProfileComponent', () => {
         AddressListComponent,
         PhoneFormatPipe,
         { provide: ToastrService, useValue: toastrService },
-        { provide: Configuration, useValue: new Configuration() },
         { provide: applicationConfiguration, useValue: new InjectionToken<AppConfig>('app.config') },
       ],
       schemas: [NO_ERRORS_SCHEMA] // Ignore template errors: remove if tests are added to test template

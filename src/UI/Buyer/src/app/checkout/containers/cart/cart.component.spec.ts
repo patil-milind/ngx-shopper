@@ -12,7 +12,7 @@ import {
   MeService,
 } from '@ordercloud/angular-sdk';
 
-import { CartComponent } from './cart.component';
+import { CartComponent } from '@app/checkout/containers/cart/cart.component';
 import {
   PageTitleComponent,
   PhoneFormatPipe,
@@ -67,7 +67,6 @@ describe('CartComponent', () => {
         { provide: OrderService, useValue: orderService },
         { provide: OcLineItemService, useValue: ocLineItemService },
         { provide: MeService, useValue: meService },
-        { provide: Configuration, useValue: new Configuration() },
         { provide: applicationConfiguration, useValue: new InjectionToken<AppConfig>('app.config') }
       ]
     })

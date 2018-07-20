@@ -3,7 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
-import { HeaderComponent } from './header.component';
+import { HeaderComponent } from '@app/layout/header/header.component';
 import {
   AppStateService,
   NavBrandsPipe,
@@ -62,7 +62,6 @@ describe('HeaderComponent', () => {
         { provide: Router, useValue: router },
         { provide: BaseResolveService, useValue: baseResolveService },
         { provide: TokenService, useValue: ocTokenService },
-        { provide: Configuration, useValue: new Configuration() },
         { provide: applicationConfiguration, useValue: new InjectionToken<AppConfig>('app.config') }
       ]
     })

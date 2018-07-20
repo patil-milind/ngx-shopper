@@ -5,8 +5,8 @@ import { of } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { InjectionToken } from '@angular/core';
 
-import { ForgotPasswordComponent } from './forgot-password.component';
-import { applicationConfiguration, AppConfig } from '../../../config/app.config';
+import { ForgotPasswordComponent } from '@app/auth/containers/forgot-password/forgot-password.component';
+import { applicationConfiguration, AppConfig } from '@app/config/app.config';
 
 import { Configuration, PasswordResetService, TokenService } from '@ordercloud/angular-sdk';
 import { CookieModule } from 'ngx-cookie';
@@ -32,7 +32,6 @@ describe('ForgotPasswordComponent', () => {
         TokenService,
         { provide: Router, useValue: router },
         { provide: PasswordResetService, useValue: ocPasswordService },
-        { provide: Configuration, useValue: new Configuration() },
         { provide: ToastrService, useValue: toastrService },
         { provide: applicationConfiguration, useValue: new InjectionToken<AppConfig>('app.config') }
       ]
@@ -63,7 +62,6 @@ describe('ForgotPasswordComponent', () => {
   describe('onSubmit', () => {
     beforeEach(() => {
       component['appConfig'].clientID = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
-      component['appConfig'].baseUrl = 'test.com';
 
       component.onSubmit();
     });
@@ -71,7 +69,7 @@ describe('ForgotPasswordComponent', () => {
       expect(ocPasswordService.SendVerificationCode).toHaveBeenCalledWith({
         Email: '',
         ClientID: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
-        URL: 'test.com'
+        URL: 'http://localhost:9876'
       });
       expect(toastrService.success).toHaveBeenCalledWith('Password Reset Email Sent!');
       expect(router.navigateByUrl).toHaveBeenCalledWith('/login');

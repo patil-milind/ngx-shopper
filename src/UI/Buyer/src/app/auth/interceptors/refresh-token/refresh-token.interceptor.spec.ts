@@ -3,11 +3,11 @@ import { InjectionToken } from '@angular/core';
 import { HttpClient, HttpHandler, HTTP_INTERCEPTORS, HttpErrorResponse } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
 
-import { RefreshTokenInterceptor } from './refresh-token.interceptor';
+import { RefreshTokenInterceptor } from '@app/auth/interceptors/refresh-token/refresh-token.interceptor';
 import { applicationConfiguration, AppConfig } from '@app/config/app.config';
 import { TokenService, Configuration } from '@ordercloud/angular-sdk';
 import { CookieModule } from 'ngx-cookie';
-import { AppAuthService } from '../../services/app-auth.service';
+import { AppAuthService } from '@app/auth/services/app-auth.service';
 import { of, BehaviorSubject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -34,7 +34,6 @@ describe('RefreshTokenInterceptor', () => {
                 { provide: AppAuthService, useValue: appAuthService },
                 { provide: TokenService, useValue: tokenService },
                 { provide: HTTP_INTERCEPTORS, useClass: RefreshTokenInterceptor, multi: true },
-                { provide: Configuration, useValue: new Configuration() },
                 { provide: applicationConfiguration, useValue: new InjectionToken<AppConfig>('app.config') }
             ],
         });
